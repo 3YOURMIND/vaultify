@@ -20,7 +20,6 @@ try {
     stage('TagAndPublish'){
         helpers.retagAndPushImage("vaultify", BRANCH_NAME, TAG_NAME)
     }
-
     stage('Deploy'){
         println "not implemented yet"
     }
