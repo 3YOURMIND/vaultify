@@ -21,9 +21,5 @@ node('docker'){
     } catch (e) {
         println "error occured: ${e}"
         throw(e)
-    } finally {
-        stage('Parse Tests'){
-            junit "**/test-reports/*.xml"
-        }
     }
 }
