@@ -2,7 +2,7 @@ BRANCH_NAME = env.BRANCH_NAME.replaceAll('/', '-').stripIndent()
 RELEASE_BRANCH = "master"
 TAG_NAME = "0.1.1"
 PROJECT = "vaultify"
-BASE_IMAGE = 3.7-alpine3.9
+BASE_IMAGE = "3.7-alpine3.9"
 
 node('docker'){
     try {
