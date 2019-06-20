@@ -1,5 +1,5 @@
 TARGET ?= prod
-BASE_IMAGE := 3.7-alpine3.7
+BASE_IMAGE := 3.7-alpine3.9
 HEAD ?= $(shell git rev-parse --short HEAD)
 TAG ?= $(shell git describe --abbrev=0 --tags)
 
@@ -31,6 +31,13 @@ artifact/tag:
 	docker tag\
 		vaultify:$(HEAD)\
 		vaultify:$(TAG)
+
+jenkins:
+	docker build \
+	    --build-arg BASE_IMAGE=$(BASE_IMAGE)\
+	    -t vaultify:$(TAG) \
+	    --target $(TARGET)\
+	    .
 
 clean:
 	rm -rf tests/new* assets/* build/ dist *vaultify.egg*
