@@ -1,10 +1,8 @@
 BRANCH_NAME = env.BRANCH_NAME.replaceAll('/', '-').stripIndent()
 RELEASE_BRANCH = "master"
-TAG_NAME = ""
-PROJECT = "button3d"
-
-
-
+TAG_NAME = "0.1.1"
+PROJECT = "vaultify"
+TARGET = "prod"
 
 node('docker'){
 try {
@@ -15,10 +13,14 @@ try {
     }
 
     stage('Build'){
-        sh "make artifact/docker"
+        sh "docker build \
+	    --build-arg BASE_IMAGE=$(BASE_IMAGE)\
+	    -t vaultify:${TAG_NAME} \
+	    --target $(TARGET)\
+	    ."
     }
     stage('TagAndPublish'){
-        helpers.retagAndPushImage("vaultify", BRANCH_NAME, TAG_NAME)
+        helpers.retagAndPushImage("vaultify", TAG_NAME, TAG_NAME)
     }
     stage('Deploy'){
         println "not implemented yet"

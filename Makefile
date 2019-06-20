@@ -32,13 +32,6 @@ artifact/tag:
 		vaultify:$(HEAD)\
 		vaultify:$(TAG)
 
-jenkins:
-	docker build \
-	    --build-arg BASE_IMAGE=$(BASE_IMAGE)\
-	    -t vaultify:$(TAG) \
-	    --target $(TARGET)\
-	    .
-
 clean:
 	rm -rf tests/new* assets/* build/ dist *vaultify.egg*
 
